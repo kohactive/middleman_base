@@ -1,46 +1,40 @@
-# Activate and configure extensions
-# https://middlemanapp.com/advanced/configuration/#configuring-extensions
+require 'active_support/core_ext/string/inflections'
 
-activate :autoprefixer do |prefix|
-  prefix.browsers = "last 2 versions"
-end
+###
+# Page options, layouts, aliases and proxies
+###
 
-# Layouts
-# https://middlemanapp.com/basics/layouts/
 
-# Per-page layout changes
-page '/*.xml', layout: false
-page '/*.json', layout: false
-page '/*.txt', layout: false
+# General configuration
+#
 
-# With alternative layout
-# page '/path/to/file.html', layout: 'other_layout'
+# Plugin Activations
+#
+activate :meta_tags
+activate :router
+activate :directory_indexes
 
-# Proxy pages
-# https://middlemanapp.com/advanced/dynamic-pages/
 
-# proxy(
-#   '/this-page-has-no-template.html',
-#   '/template-file.html',
-#   locals: {
-#     which_fake_page: 'Rendering a fake page with a local variable'
-#   },
-# )
-
-# Helpers
-# Methods defined in the helpers block are available in templates
-# https://middlemanapp.com/basics/helper-methods/
-
-# helpers do
-#   def some_helper
-#     'Helping'
-#   end
-# end
+# Asset Locations
+#
+set :css_dir,    'assets/stylesheets'
+set :js_dir,     'assets/javascripts'
+set :images_dir, 'assets/images'
+set :fonts_dir,  'assets/fonts'
 
 # Build-specific configuration
-# https://middlemanapp.com/advanced/configuration/#environment-specific-settings
+#
+configure :build do
+  # You can place any global configs here, but it's preferred
+  # that you place environment configs in the appropriate
+  # environment file, check ./environments folder.
+  config[:host] = ENV['SITE_URL']
+end
 
-# configure :build do
-#   activate :minify_css
-#   activate :minify_javascript
-# end
+# After build actions
+after_build do |builder|
+  src = File.join("_redirects")
+  dst = File.join(config[:build_dir],"_redirects")
+  builder.thor.source_paths << File.dirname(__FILE__)
+  builder.thor.copy_file(src,dst)
+end

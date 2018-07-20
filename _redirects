@@ -1,0 +1,3 @@
+# This file is used with Netlify to setup URL redirects. When
+# the site is built, this will be moved to the build folder.
+# For details on directs check out https://www.netlify.com/docs/redirects/
