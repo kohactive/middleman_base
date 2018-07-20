@@ -14,6 +14,12 @@ activate :meta_tags
 activate :router
 activate :directory_indexes
 
+# Activate webpack
+activate :external_pipeline,
+  name: :webpack,
+  command: build? ? 'npm run build' : 'npm run start',
+  source: '.tmp/dist',
+  latency: 1
 
 # Asset Locations
 #
