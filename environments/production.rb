@@ -25,7 +25,7 @@ configure :production do
 
   # Ping the search engines upon build
   activate :sitemap_ping do |config|
-    config.host         = host
+    config.host         = ENV['SITE_URL']
     config.sitemap_file = 'sitemap.xml'
     config.ping_google  = true
     config.ping_bing    = true

@@ -1,45 +1,47 @@
-// webpack.config.js
-
-var path = require('path')
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: {
-    site: ['./assets/javascripts/application.js', './assets/stylesheets/application.scss']
-  },
+  entry: { main: './assets/index.js' },
   output: {
-    filename: 'assets/javascripts/[name].js',
-    path: path.resolve(__dirname, '.tmp/dist')
+    path: path.resolve(__dirname, '.tmp/dist'),
+    filename: 'application.js'
   },
-
   module: {
     rules: [
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            'css-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: function() {
-                  return [
-                    require('autoprefixer'),
-                    require('postcss-flexbugs-fixes')
-                  ]
-                }
-              }
-            },
-            'sass-loader'
-          ]
-        })
+        use: ExtractTextPlugin.extract(
+          {
+            fallback: 'style-loader',
+            use: ['css-loader', 'sass-loader']
+          }
+        )
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              context: './images',
+              outputPath: 'images/'
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: 'assets/stylesheets/[name].css'
+      filename: 'application.css'
     })
   ]
-}
+};
