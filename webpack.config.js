@@ -1,12 +1,18 @@
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack')
+var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+// var Clean = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: { main: './assets/index.js' },
+  entry: {
+    main: './source/assets/javascripts/application.js'
+  },
+
   output: {
     path: path.resolve(__dirname, '.tmp/dist'),
-    filename: 'application.js'
+    filename: 'assets/javascripts/[name].bundle.js'
   },
+
   module: {
     rules: [
       {
@@ -16,15 +22,22 @@ module.exports = {
           loader: "babel-loader"
         }
       },
+
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract(
+        use: [
+          'style-loader',
           {
-            fallback: 'style-loader',
-            use: ['css-loader', 'sass-loader']
-          }
-        )
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2
+            }
+          },
+          'postcss-loader',
+          'sass-loader'
+        ]
       },
+
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
@@ -40,8 +53,9 @@ module.exports = {
     ]
   },
   plugins: [
+    // new Clean(['.tmp']),
     new ExtractTextPlugin({
-      filename: 'application.css'
+      filename: 'assets/stylesheets/[name].bundle.css'
     })
   ]
 };
