@@ -9,7 +9,9 @@ gem 'middleman-minify-html'
 gem 'middleman-robots'
 gem 'middleman-router', '~> 0.0.1'
 gem 'middleman-sitemap-ping'
+gem 'middleman-sprockets'
 gem 'pry'
+gem 'sass'
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 gem 'wdm', '~> 0.1', platforms: [:mswin, :mingw]
 gem 'virtus'

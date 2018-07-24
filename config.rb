@@ -10,16 +10,11 @@ require 'active_support/core_ext/string/inflections'
 
 # Plugin Activations
 #
+activate :directory_indexes
 activate :meta_tags
 activate :router
-activate :directory_indexes
+activate :sprockets
 
-# Activate webpack
-activate :external_pipeline,
-  name: :webpack,
-  command: build? ? 'npm run build' : 'npm run start',
-  source: '.tmp/dist',
-  latency: 1
 
 # Asset Locations
 #
