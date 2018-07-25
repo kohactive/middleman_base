@@ -1,0 +1,33 @@
+// Settings
+//
+// Should include variables, configs, and settings
+@import 'settings/settings.global';
+
+// Genric
+//
+// This should include Low-specificity, far-reaching
+// rulesets like normalize, reset, etc.
+@import 'generic/generic.box-sizing';
+@import 'generic/generic.normalize';
+@import 'generic/generic.reset';
+@import 'generic/generic.shared';
+
+
+// Components
+//
+// Components include things like buttons, inputs,
+// navigation, dropdowns, etc.
+// @import 'components/components.buttons';
+
+
+// Layouts
+//
+// Page/layout specific styles, e.g. if a page has
+// a unique look that overrides generic styles
+// @import 'layouts/layouts.about';
+
+// Utilities
+//
+// Utility classes like mixins, clearfix, spacing,
+// margins/paddings, etc.
+// @import 'utilities/utilities.clearfix';
