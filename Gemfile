@@ -10,6 +10,7 @@ gem 'middleman-robots'
 gem 'middleman-router', '~> 0.0.1'
 gem 'middleman-sitemap-ping'
 gem 'middleman-sprockets'
+gem 'nokogiri'
 gem 'pry'
 gem 'sass'
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
