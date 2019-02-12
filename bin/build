@@ -1,0 +1,15 @@
+#!/bin/sh
+
+while getopts e: option
+do
+case "${option}"
+in
+e) ENVIRONMENT=${OPTARG};;
+esac
+done
+
+echo "Building environment: $ENVIRONMENT"
+
+bundle install
+bin/optimize_images
+bundle exec middleman build -e $ENVIRONMENT --verbose

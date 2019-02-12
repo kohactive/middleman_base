@@ -1,5 +1,5 @@
-configure :production do
-  config[:host] = "https://www.domain.com"
+configure :review do
+  config[:host] = ENV['DEPLOY_PRIME_URL']
 
   # Minify errythang
   activate :minify_css, inline: true
@@ -20,17 +20,8 @@ configure :production do
   rules: [
     {
       user_agent: '*',
-      allow:      %w(/),
+      disallow:  %w(/),
     }
   ],
   sitemap: "#{config[:host]}/sitemap.xml"
-
-  # Ping the search engines upon build
-  activate :sitemap_ping do |config|
-    config.host         = host
-    config.sitemap_file = 'sitemap.xml'
-    config.ping_google  = true
-    config.ping_bing    = true
-    config.after_build  = true
-  end
 end

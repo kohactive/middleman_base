@@ -1,4 +1,6 @@
 configure :staging do
+  config[:host] = "https://staging.domain.com"
+
   # Minify errythang
   activate :minify_css, inline: true
   activate :minify_html

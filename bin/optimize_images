@@ -1,0 +1,18 @@
+echo "Running image optimization using ImageMagick"
+echo "Checking to see if you have ImageMagick installed..."
+
+if ! type "convert" > /dev/null; then
+  echo "You don't have ImageMagick install, check out the docs to get it installed and setup: https://imagemagick.org/script/download.php"
+else
+  convert --version
+  echo "ImageMagick installed!"
+
+  echo "Optimizing all JPGs"
+  find ./source/assets/images/ -name "*.jpg" -exec convert "{}" -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG "{}" \; -exec echo "{}" \;
+
+  echo "Optimizing all PNGs"
+  find ./sources/assets/images/ -name "*.png" -exec convert "{}" -strip "{}" \; -exec echo "{}" \;
+
+  echo "Successfully optimized JPG and PNG images"
+fi
+
