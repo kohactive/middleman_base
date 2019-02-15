@@ -11,7 +11,7 @@ else
   find ./source/assets/images/ -name "*.jpg" -exec convert "{}" -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG "{}" \; -exec echo "{}" \;
 
   echo "Optimizing all PNGs"
-  find ./sources/assets/images/ -name "*.png" -exec convert "{}" -strip "{}" \; -exec echo "{}" \;
+  find ./source/assets/images/ -name "*.png" -exec convert "{}" -strip "{}" \; -exec echo "{}" \;
 
   echo "Successfully optimized JPG and PNG images"
 fi
